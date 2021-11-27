@@ -12,8 +12,30 @@ namespace LookingForChars
         /// <returns>The number of occurrences of all characters.</returns>
         public static int GetCharsCount(string str, char[] chars)
         {
-            // TODO #1. Implement the method using "for" statement.
-            throw new NotImplementedException();
+            if (str == null)
+            {
+                throw new ArgumentNullException(nameof(str));
+            }
+
+            if (chars == null)
+            {
+                throw new ArgumentNullException(nameof(chars));
+            }
+
+            int count = 0;
+
+            for (int i = 0; i < chars.Length; i++)
+            {
+                for (int j = 0; j < str.Length; j++)
+                {
+                    if (str[j] == chars[i])
+                    {
+                        count++;
+                    }
+                }
+            }
+
+            return count;
         }
 
         /// <summary>
@@ -26,8 +48,55 @@ namespace LookingForChars
         /// <returns>The number of occurrences of all characters within the specified range of elements in the <see cref="string"/>.</returns>
         public static int GetCharsCount(string str, char[] chars, int startIndex, int endIndex)
         {
-            // TODO #2. Implement the method using "while" statement.
-            throw new NotImplementedException();
+            if (str == null)
+            {
+                throw new ArgumentNullException(nameof(str));
+            }
+
+            if (chars == null)
+            {
+                throw new ArgumentNullException(nameof(chars));
+            }
+
+            if (startIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is less than zero");
+            }
+
+            if (startIndex > str.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is greater than str.Length");
+            }
+
+            if (startIndex > endIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is greater than endIndex");
+            }
+
+            if (endIndex > str.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(endIndex), "endIndex > str.Length");
+            }
+
+            int count = 0, i = 0;
+            while (i < chars.Length)
+            {
+                int j = startIndex;
+
+                while (j <= endIndex)
+                {
+                    if (str[j] == chars[i])
+                    {
+                        count++;
+                    }
+
+                    j++;
+                }
+
+                i++;
+            }
+
+            return count;
         }
 
         /// <summary>
@@ -41,8 +110,60 @@ namespace LookingForChars
         /// <returns>The limited number of occurrences of characters to search for within the specified range of elements in the <see cref="string"/>.</returns>
         public static int GetCharsCount(string str, char[] chars, int startIndex, int endIndex, int limit)
         {
-            // TODO #3. Implement the method using "do..while" statements.
-            throw new NotImplementedException();
+            if (str == null)
+            {
+                throw new ArgumentNullException(nameof(str));
+            }
+
+            if (chars == null)
+            {
+                throw new ArgumentNullException(nameof(chars));
+            }
+
+            if (startIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is less than zero");
+            }
+
+            if (limit < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(limit), "limit is less than zero");
+            }
+
+            if (startIndex > str.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is greater than str.Length");
+            }
+
+            if (startIndex > endIndex)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is greater than endIndex");
+            }
+
+            if (endIndex > str.Length)
+            {
+                throw new ArgumentOutOfRangeException(nameof(endIndex), "endIndex > str.Length");
+            }
+
+            int count = 0, i = 0;
+            do
+            {
+                int j = startIndex;
+                do
+                {
+                    if (str[j] == chars[i])
+                    {
+                        count++;
+                        if (count == limit)
+                        {
+                            return count;
+                        }
+                    }
+                }
+                while (++j <= endIndex);
+            }
+            while (++i < chars.Length);
+            return count;
         }
     }
 }
