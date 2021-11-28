@@ -1,4 +1,5 @@
 ﻿using System;
+#pragma warning disable S3776
 
 namespace LookingForChars
 {
@@ -61,6 +62,11 @@ namespace LookingForChars
             if (startIndex < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is less than zero");
+            }
+
+            if (endIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException(nameof(startIndex), "endIndex is less than zero");
             }
 
             if (startIndex > str.Length)
@@ -159,11 +165,11 @@ namespace LookingForChars
                     if (str[j] == chars[i])
                     {
                         count++;
-                    }
 
-                    if (count == limit)
-                    {
-                        return count;
+                        if (count == limit)
+                        {
+                            return count;
+                        }
                     }
                 }
                 while (++j <= endIndex);
