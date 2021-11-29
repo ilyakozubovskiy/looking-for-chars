@@ -119,31 +119,38 @@ namespace LookingForChars
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            else if (chars == null)
+
+            if (chars == null)
             {
                 throw new ArgumentNullException(nameof(chars));
             }
-            else if (startIndex < 0)
+
+            if (startIndex < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is less than zero");
             }
-            else if (endIndex < 0)
+
+            if (endIndex < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(startIndex), "endIndex is less than zero");
             }
-            else if (limit < 0)
+
+            if (limit < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(limit), "limit is less than zero");
             }
-            else if (startIndex > str.Length)
+
+            if (startIndex > str.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is greater than str.Length");
             }
-            else if (startIndex > endIndex)
+
+            if (startIndex > endIndex)
             {
                 throw new ArgumentOutOfRangeException(nameof(startIndex), "startIndex is greater than endIndex");
             }
-            else if (endIndex > str.Length)
+
+            if (endIndex > str.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(endIndex), "endIndex > str.Length");
             }
@@ -152,21 +159,24 @@ namespace LookingForChars
             do
             {
                 int j = startIndex;
-                do
+
+                while (j <= endIndex)
                 {
                     if (str[j] == chars[i])
                     {
                         count++;
-
-                        if (count == limit)
-                        {
-                            return count;
-                        }
                     }
+
+                    j++;
                 }
-                while (++j <= endIndex);
             }
             while (++i < chars.Length);
+
+            if (count > limit)
+            {
+                return limit;
+            }
+
             return count;
         }
     }
